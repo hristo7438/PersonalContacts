@@ -1,0 +1,38 @@
+<div class="contacts-list">
+    <p-button (onClick)="addContact()">Add Contact</p-button>
+    <ng-container *ngIf="allContacts$ | async as allContacts else noContacts">
+        <p-table [value]="allContacts" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Birth Date</th>
+                    <th>IBAN</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contact>
+                <tr>
+                    <td><p-button (onClick)="editContact(contact)" [label]="contact.firstName + ' ' + contact.surName"
+                            styleClass="p-button-link"></p-button></td>
+                    <td>{{ contact.address }} <br> {{"(" + contact.phoneNumber + ")" }}</td>
+                    <td>{{ contact.dateOfBirth }}</td>
+                    <td>{{ contact.iban }}</td>
+                    <td>
+                        <p-button (click)="deleteContact(contact.id)" label="Delete"
+                            styleClass="p-button-danger"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-container>
+
+    <ng-container>
+        <p-toast></p-toast>
+        <p-confirmDialog [style]="{width: '50vw'}" key="delete-contact-confirmation"></p-confirmDialog>
+    </ng-container>
+
+    <ng-template #noContacts>
+        <span>There are currently no contacts to be displayed</span>
+    </ng-template>
+</div>

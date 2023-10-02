@@ -1,0 +1,52 @@
+<div class="form-container">
+    <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <label>First Name</label>
+            <input pInputText formControlName="firstName">
+            <p-message *ngIf="firstName?.errors?.['required'] && firstName?.touched" severity="error"
+                text="First Name is required"></p-message>
+        </div>
+
+        <div class="form-group">
+            <label>Sur Name</label>
+            <input pInputText formControlName="surName">
+            <p-message *ngIf="surName?.errors?.['required'] && surName?.touched" severity="error"
+                text="Sur Name is required"></p-message>
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <textarea pInputTextarea formControlName="address"></textarea>
+            <p-message *ngIf="address?.errors?.['required'] && address?.touched" severity="error"
+                text="Address is required"></p-message>
+        </div>
+
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <p-calendar formControlName="dateOfBirth" [showIcon]="true"></p-calendar>
+            <p-message *ngIf="dateOfBirth?.errors?.['required'] && dateOfBirth?.touched" severity="error"
+                text="Date of Birth is required"></p-message>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input pInputText formControlName="phoneNumber">
+            <p-message *ngIf="phoneNumber?.errors?.['required'] && phoneNumber?.touched" severity="error"
+                text="Phone Number is required"></p-message>
+        </div>
+
+        <div class="form-group">
+            <label>IBAN</label>
+            <input pInputText formControlName="iban">
+            <p-message *ngIf="iban?.errors?.['required'] && iban?.touched" severity="error"
+                text="IBAN is required"></p-message>
+            <p-message *ngIf="!iban?.errors?.['required'] && iban?.errors?.['pattern'] && iban?.touched"
+                severity="error" text="IBAN must be in correct format"></p-message>
+        </div>
+
+        <div class="btn-toolbar">
+            <p-button class="btn" styleClass="p-button-secondary" label="Cancel" (onClick)="cancel()"></p-button>
+            <p-button class="btn" type="submit" label="Save" [disabled]="!contactForm.valid"></p-button>
+        </div>
+    </form>
+</div>
