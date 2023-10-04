@@ -5,6 +5,7 @@ using Application.Common;
 using Application.Queries.Common;
 using Application.Queries.Details;
 using Application.Queries.Search;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +15,9 @@ namespace Web.Controllers
 {
 	public class ContactsController : ApiController
 	{
+		public ContactsController(IMediator mediator)
+			: base(mediator) { }
+
 		[HttpGet]
 		[Route(Id)]
 		public async Task<ActionResult<ContactOutputModel>> Details(
